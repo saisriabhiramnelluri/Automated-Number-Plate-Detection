@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANPR Vehicle Detection</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Lexend', sans-serif;
+            background: #f2f5fa;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        input[type="file"] {
+            font-size: 1rem;
+            padding: 10px;
+            border: 2px dashed #bbb;
+            border-radius: 12px;
+            background: #f9f9f9;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button {
+            background: #2d89ef;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #1a5fc1;
+        }
+
+        .spinner {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        video {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 720px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>ANPR Vehicle Detection</h1>
+    <form action="{{ url_for('upload_video') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="video" required>
+        <button type="submit">Upload Video</button>
+    </form>
+
+
+    <div class="spinner" id="spinner">
+        <img src="https://i.gifer.com/ZZ5H.gif" alt="Processing..." width="80">
+        <p>Processing video, please wait...</p>
+    </div>
+
+    {% if processed %}
+    <video controls autoplay muted>
+        <source src="{{ url_for('static', filename='output.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function () {
+            document.getElementById('spinner').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

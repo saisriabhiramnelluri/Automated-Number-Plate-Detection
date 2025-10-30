@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Orbitron:wght@700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/background.jpg') no-repeat center center/cover; /* Example animated background */
+    opacity: 0.1; /* Subtle overlay */
+    z-index: -1;
+}
+
+
+.container {
+    background-color: rgba(25, 25, 45, 0.85); /* Slightly darker, more opaque */
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 900px;
+    width: 90%;
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.app-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5em;
+    color: #4CAF50; /* A vibrant green */
+    margin-bottom: 40px;
+    text-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+    letter-spacing: 2px;
+    animation: neonGlow 2s infinite alternate;
+}
+
+@keyframes neonGlow {
+    from { text-shadow: 0 0 5px #4CAF50, 0 0 10px #4CAF50, 0 0 15px #4CAF50; }
+    to { text-shadow: 0 0 10px #4CAF50, 0 0 20px #4CAF50, 0 0 30px #4CAF50; }
+}
+
+.upload-section, .processing-section, .video-player-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: rgba(30, 30, 55, 0.7);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.upload-section:hover, .processing-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+.upload-label {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #b0b0b0;
+}
+
+.upload-input {
+    display: none; /* Hide default file input */
+}
+
+.btn {
+    background-color: #007bff; /* A nice blue */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
+}
+
+.upload-btn {
+    background-color: #28a745; /* Green for upload */
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.upload-btn:hover {
+    background-color: #218838;
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.6);
+}
+
+.generate-btn {
+    background-color: #ffc107; /* Yellow for generate */
+    color: #333;
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+.generate-btn:hover {
+    background-color: #e0a800;
+    box-shadow: 0 8px 20px rgba(255, 193, 7, 0.6);
+}
+
+
+.status-message {
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #f8f9fa;
+    min-height: 25px; /* To prevent layout shift */
+}
+
+#processed-video-player {
+    width: 100%;
+    max-width: 768px; /* Max width for the video player */
+    border-radius: 15px;
+    border: 3px solid #4CAF50;
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.6);
+    margin-top: 30px;
+    transition: all 0.5s ease;
+    background-color: #000; /* Black background for video area */
+}
+
+#processed-video-player.show-video {
+    display: block;
+    animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 40px;
+    }
+
+    .app-title {
+        font-size: 2.5em;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 25px;
+    }
+
+    .app-title {
+        font-size: 2em;
+    }
+
+    .upload-label {
+        font-size: 1.1em;
+    }
+
+    .status-message {
+        font-size: 0.95em;
+    }
+}

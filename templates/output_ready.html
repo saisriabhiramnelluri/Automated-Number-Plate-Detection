@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Output Ready</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 60px;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 12px 24px;
+            background-color: #1abc9c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #16a085;
+        }
+        table {
+            margin: 40px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 2px solid #444;
+            padding: 12px 24px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button.search-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>✅ Video processed successfully!</h2>
+    <p>You can now view the annotated output.</p>
+    <a href="{{ url_for('video_feed') }}">
+        <button class="btn">Show Output</button>
+    </a>
+
+    <hr>
+
+    <h2>🔍 Search License Plate</h2>
+    <input type="text" id="searchBox" placeholder="Enter license plate number" />
+    <button class="search-btn" onclick="searchPlate()">Search</button>
+    <p id="searchResult"></p>
+
+    <hr>
+
+    <h2>📋 Detected License Plates</h2>
+    <table>
+        <tr>
+            <th>License Plate Number</th>
+            <th>Time Stamp</th>
+        </tr>
+        {% for plate in plates %}
+        <tr>
+            <td>{{ plate }}</td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        const plates = {{ plates | tojson | safe }};
+        function searchPlate() {
+            const query = document.getElementById('searchBox').value.trim().toUpperCase();
+            const result = plates.includes(query)
+                ? "✅ Yes, plate found!"
+                : "❌ No, plate not found.";
+            document.getElementById('searchResult').innerText = result;
+        }
+    </script>
+
+</body>
+</html>
